@@ -1,40 +1,53 @@
-require 'coin_changer'
+require "coin_changer"
 
-RSpec.describe Coinchanger, "change" do
+RSpec.describe CoinChanger, "#dispense" do
 
-	let(:penny) { 1 }
-	let(:nickel){ 5 }
+    coin_changer = CoinChanger.new
 
-	it "given one cent it returns a penny" do 
-		coin_changer = Coinchanger.new
-		expect(coin_changer.dispense(1)).to eq [penny]  
-	end
+    it "if given one cent, return a penny" do
+        expect(coin_changer.dispense(1)).to eq ["penny"]
+    end
 
-	it "given two cents it returns two pennies" do 
-		coin_changer = Coinchanger.new
-		expect(coin_changer.dispense(2)).to eq [penny, penny]  
-	end
+    it "if given two cents, return two penny" do
+        expect(coin_changer.dispense(2)).to eq ["penny", "penny"]
+    end
 
-	it "given three cents it returns three pennies" do 
-		coin_changer = Coinchanger.new
-		expect(coin_changer.dispense(3)).to eq [penny, penny, penny]  
-	end
+    it "if given five cents, return a nickel" do
+        expect(coin_changer.dispense(5)).to eq ["nickel"]
+    end
 
-	it "given five cents it returns one nickel" do 
-		coin_changer = Coinchanger.new
-		expect(coin_changer.dispense(5)).to eq [nickel]  
-	end
+    it "if given six cents, return a nickel and penny" do
+        expect(coin_changer.dispense(6)).to eq ["nickel", "penny"]
+    end
 
-	it "given six cents it returns one nickel and one penny" do 
-		coin_changer = Coinchanger.new
-		expect(coin_changer.dispense(6)).to eq [nickel, penny]  
-	end
-		it "given seven cents it returns one nickel and two pennies" do 
-		coin_changer = Coinchanger.new
-		expect(coin_changer.dispense(7)).to eq [nickel, penny, penny]  
-	end
+    it "if given ten cents, return a dime" do
+        expect(coin_changer.dispense(10)).to eq ["dime"]
+    end
+
+    it "if given eleven cents, return a dime and penny" do
+        expect(coin_changer.dispense(11)).to eq ["dime", "penny"]
+    end
+
+    it "if given twelve cents, return a dime and two pennies" do
+        expect(coin_changer.dispense(12)).to eq ["dime", "penny", "penny"]
+    end
+
+    it "if given seventeen cents, return a dime, a nickel, and two pennies" do
+        expect(coin_changer.dispense(17)).to eq ["dime", "nickel", "penny", 
+        "penny"]
+    end
+
+    it "if given 24 cents, return two dimes, four pennies" do
+        expect(coin_changer.dispense(24)).to eq ["dime", "dime", "penny", 
+        "penny", "penny", "penny"]
+    end
+
+    it "if given 25 cents, returns a quarter" do
+        expect(coin_changer.dispense(25)).to eq ["quarter"]
+    end
+
+    it "if given 99 cents, returns three quarters, two dimes, four pennies" do
+        expect(coin_changer.dispense(99)).to eq ["quarter", "quarter", "quarter",
+    "dime", "dime", "penny", "penny", "penny", "penny"]
+    end
 end
-# dime = 10
-# nickel = 5
-# penny = 1
-# [dime, nickel, penny, penny]

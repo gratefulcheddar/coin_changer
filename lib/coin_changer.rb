@@ -1,23 +1,27 @@
-class Coinchanger
-	
-	def dispense(change)
-		penny = 1
-		nickel = 5
-		coin_array = []
-		while change > 4
-			change -= 5
-			coin_array << nickel
-		end
+class CoinChanger
+    def dispense(change_total)
+        coins_dispensed = []
 
-		change.times do |i|
-			coin_array << penny
-		end
-		
-		coin_array
-	end
+        while change_total > 24
+            change_total -= 25
+            coins_dispensed << "quarter"
+        end
+        
+        while change_total > 9
+            change_total -= 10
+            coins_dispensed << "dime"
+        end
 
-	def other_method
-	
-	end
+        while change_total > 4
+            change_total -= 5
+            coins_dispensed << "nickel"
+        end
 
+        if change_total <= 4
+            change_total.times do
+                coins_dispensed << "penny"
+            end 
+        end
+        coins_dispensed
+    end
 end
